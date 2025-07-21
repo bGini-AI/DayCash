@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DayCash - הכסף שלך עושה לך כסף</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            direction: rtl;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-tagline {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2em;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 40px;
+        }
+
+        .company-info {
+            margin-top: 40px;
+        }
+
+        .company-info h3 {
+            color: white;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .company-info p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #1e3c72;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255,215,0,0.3);
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            color: #1e3c72;
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 3px solid #2a5298;
+            padding-bottom: 15px;
+        }
+
+        /* Problem Section */
+        .problem-section {
+            background: #f8f9fa;
+        }
+
+        .problem-solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .problem-card {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .solution-card {
+            background: linear-gradient(135deg, #51cf66 0%, #69db7c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .percentage-highlight {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .percentage {
+            font-size: 3em;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+            border-color: #2a5298;
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            color: #1e3c72;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background: #f8f9fa;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .step-card {
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            background: #FFD700;
+            color: #1e3c72;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 0 auto 20px auto;
+        }
+
+        .step-card h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .regulation-box {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        /* Target Audience */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 50px 0;
+        }
+
+        .audience-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #2a5298;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .audience-card h3 {
+            color: #1e3c72;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #f8f9fa;
+            margin: 10px 0;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border-right: 4px solid #2a5298;
+            color: #1e3c72;
+            transition: all 0.3s ease;
+        }
+
+        li:hover {
+            background: #e9ecef;
+            transform: translateX(-5px);
+        }
+
+        /* Tax Benefits */
+        .tax-benefits {
+            background: #f8f9fa;
+        }
+
+        .tax-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .tax-card {
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .tax-bad {
+            background: #ffe6e6;
+            border: 2px solid #ff6b6b;
+        }
+
+        .tax-good {
+            background: #e6ffe6;
+            border: 2px solid #51cf66;
+        }
+
+        .tax-card h4 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-section .section-title {
+            color: white;
+            border-bottom-color: rgba(255,255,255,0.3);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .contact-info {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-info h3 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            margin: 10px 0;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .final-cta {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .final-cta h3 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .copyright {
+            margin-top: 40px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5em;
+            }
+
+            .hero-tagline {
+                font-size: 1.3em;
+            }
+
+            .hero-subtitle {
+                font-size: 1em;
+            }
+
+            .section {
+                padding: 50px 15px;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .problem-solution-grid,
+            .audience-grid,
+            .contact-grid,
+            .tax-comparison {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card,
+            .step-card {
+                padding: 25px 20px;
+            }
+
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 1em;
+            }
+
+            .percentage {
+                font-size: 2.5em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2em;
+            }
+
+            .hero-tagline {
+                font-size: 1.1em;
+            }
+
+            .section {
+                padding: 40px 10px;
+            }
+
+            .section-title {
+                font-size: 1.8em;
+            }
+
+            .feature-card,
+            .step-card {
+                padding: 20px 15px;
+            }
+
+            .percentage {
+                font-size: 2em;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header / Hero Section -->
+    <header id="home">
+        <h1 class="hero-title">DayCash</h1>
+        <div class="hero-tagline">מהיום הכסף בחשבון העו"ש שלך עושה לך כסף</div>
+        <div class="hero-subtitle">הפלטפורמה המתקדמת ביותר לניהול נזילות חכמה</div>
+        
+        <div class="company-info">
+            <h3>מיקוד פיננסים יעוץ והשקעות בע"מ</h3>
+            <p>בניהול אריאל גנוט</p>
+        </div>
+        
+        <a href="#contact" class="cta-button">בואו נתחיל להרוויח יחד</a>
+    </header>
+
+    <!-- Problem Section -->
+    <section class="section problem-section" id="problem">
+        <h2 class="section-title">הבעיה שאנו פותרים</h2>
+        
+        <div class="problem-solution-grid">
+            <div class="problem-card">
+                <h3>💸 הכסף שלך לא עובד בשבילך</h3>
+                <ul>
+                    <li>כסף בעו"ש לא מקבל ריבית כלל</li>
+                    <li>הבנק מרוויח, אתה מפסיד</li>
+                    <li>פיקדונות דורשים מעקב יומי</li>
+                    <li>חשש מיתרות חובה יקרות</li>
+                </ul>
+            </div>
+            
+            <div class="solution-card">
+                <h3>💡 הפתרון שלנו</h3>
+                <p><strong>פלטפורמה חכמה שמנהלת את הנזילות שלך אוטומטית</strong></p>
+                <p>מעבירה כסף לקרנות כספיות ופיקדונות עם ריבית הוגנת</p>
+            </div>
+        </div>
+        
+        <div class="percentage-highlight">
+            <div class="percentage">4%-4.4%</div>
+            <p>ריבית ממוצעת בקרנות כספיות (חצי ראשון 2025)</p>
+        </div>
+    </section>
+
+    <!-- What We Do Section -->
+    <section class="section" id="what-we-do">
+        <h2 class="section-title">מה אנחנו עושים?</h2>
+        
+        <div class="percentage-highlight">
+            <h3>DayCash - טכנולוגיה חכמה לניהול כספים</h3>
+            <p>בודקת מידי יום את יתרת העו"ש ומעבירה לפיקדונות/קרנות נושאי ריבית</p>
+        </div>
+        
+        <div class="audience-grid">
+            <div class="audience-card">
+                <h3>🔄 תהליך אוטומטי</h3>
+                <ul>
+                    <li>יתרה חיובית → העברה לפיקדון/קרן</li>
+                    <li>יתרה שלילית → החזרת כסף לעו"ש</li>
+                    <li>מניעת כניסה למינוס</li>
+                    <li>אופטימיזציה יומית</li>
+                </ul>
+            </div>
+            <div class="audience-card">
+                <h3>🚀 יכולות עתידיות</h3>
+                <ul>
+                    <li>חיבור למתן אשראי</li>
+                    <li>מניעת ריבית גבוהה על חובות</li>
+                    <li>פתרונות מימון חכמים</li>
+                    <li>ניהול רב-בנקאי</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <h2 class="section-title">תכונות מרכזיות</h2>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🏦</div>
+                <h3>ניהול מרוכז</h3>
+                <p>עבודה מול כל הבנקים הגדולים</p>
+                <p>תמונה מלאה של המצב הכספי</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>ניהול אוטומטי</h3>
+                <p>אלגוריתם חכם לניתוח יתרות</p>
+                <p>העברות אוטומטיות למקסימום ריבית</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>קרנות כספיות</h3>
+                <p>השקעה חכמה בריבית אטרקטיבית</p>
+                <p>יתרונות מיסוי על פני פיקדונות</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>מעקב בזמן אמת</h3>
+                <p>מידע און-ליין מפורט</p>
+                <p>דיווח יומי ב-SMS</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>אבטחה מלאה</h3>
+                <p>הצפנה מתקדמת</p>
+                <p>שמירת פרטיות מלאה</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>זמינות מיידית</h3>
+                <p>גישה 24/7 לכספים</p>
+                <p>משיכה ללא קנסות</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section how-it-works" id="how-it-works">
+        <h2 class="section-title">איך זה עובד?</h2>
+        
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>חיבור חשבונות</h3>
+                <p>חיבור מאובטח של כל חשבונות הבנק דרך API בנקאי מוסדר</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>ניתוח חכם</h3>
+                <p>האלגוריתם מנתח את חשבון העו"ש ומזהה עודפי כסף</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>השקעה אוטומטית</h3>
+                <p>העברה אוטומטית לפיקדונות יומיים וקרנות כספיות</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3>מעקב ורווחים</h3>
+                <p>מעקב מתמיד עם אפשרות משיכה מיידית</p>
+            </div>
+        </div>
+        
+        <div class="regulation-box">
+            <div class="step-number" style="background: white; color: #1e3c72;">5</div>
+            <h3>גופים מפוקחים</h3>
+            <p>עבודה עם גופים מוסדרים על ידי בנק ישראל ורשות שוק ההון</p>
+            <p>היתר עיסקא ופתרונות האיסלאם</p>
+        </div>
+    </section>
+
+    <!-- Target Audience Section -->
+    <section class="section" id="audience">
+        <h2 class="section-title">למי זה מתאים?</h2>
+        
+        <div class="audience-grid">
+            <div class="audience-card">
+                <h3>🏠 משקי בית</h3>
+                <ul>
+                    <li>ניהול נכון של נזילות משפחתית</li>
+                    <li>מקסימום תשואה על כספי העו"ש</li>
+                    <li>חיסכון בזמן ומאמץ</li>
+                    <li>הגנה מפני יתרות חובה</li>
+                </ul>
+            </div>
+            <div class="audience-card">
+                <h3>🏢 עסקים קטנים</h3>
+                <ul>
+                    <li>ניהול תזרים מזומנים יעיל</li>
+                    <li>השקעה חכמה של עודפי נזילות</li>
+                    <li>יתרונות מיסוי</li>
+                    <li>פתרונות מימון מתקדמים</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="percentage-highlight">
+            <h3>💡 המטרה: לגרום לכסף שלך לעבוד בשבילך</h3>
+            <p>במקום שהבנק ירוויח על הכסף שלך - אתה תרוויח</p>
+        </div>
+    </section>
+
+    <!-- Tax Benefits Section -->
+    <section class="section tax-benefits">
+        <h2 class="section-title">יתרונות נוספים</h2>
+        
+        <div class="audience-card">
+            <h3>💼 יתרונות מיסוי</h3>
+            <div class="tax-comparison">
+                <div class="tax-card tax-bad">
+                    <h4>פיקדון רגיל</h4>
+                    <p>🔴 הריבית כולה חייבת במס</p>
+                </div>
+                <div class="tax-card tax-good">
+                    <h4>קרן כספית</h4>
+                    <p>🟢 מס רק על הרווח הריאלי</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="audience-card">
+            <h3>🛡️ אבטחה ורגולציה</h3>
+            <ul>
+                <li>גופים מפוקחים על ידי בנק ישראל</li>
+                <li>פיקוח רשות שוק ההון</li>
+                <li>רמת אבטחה בנקאית</li>
+                <li>שמירת פרטיות מלאה</li>
+            </ul>
+        </div>
+        
+        <div class="percentage-highlight">
+            <h3>🌍 פתרונות מגוונים</h3>
+            <p>היתר עיסקא ופתרונות מותאמים לחוקי האיסלאם</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact-section" id="contact">
+        <h2 class="section-title">בואו נתחיל להרוויח יחד</h2>
+        
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>📞 צור קשר</h3>
+                <p><strong>📧 אימייל:</strong> info@daycash.co.il</p>
+                <p><strong>📞 טלפון:</strong> 03-1234567</p>
+                <p><strong>📍 כתובת:</strong> תל אביב, ישראל</p>
+            </div>
+            
+            <div class="contact-info">
+                <h3>⏰ שעות פעילות</h3>
+                <p>ראשון - חמישי: 9:00-18:00</p>
+                <p>שישי: 9:00-14:00</p>
+                <p>שבת: סגור</p>
+            </div>
+        </div>
+        
+        <div class="final-cta">
+            <h3>🎯 DayCash</h3>
+            <p>הפלטפורמה המתקדמת ביותר לניהול פיקדונות יומיות וקרנות כספיות בישראל</p>
+            <a href="mailto:info@daycash.co.il" class="cta-button">צור קשר עכשיו</a>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2025 DayCash. כל הזכויות שמורות.</p>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simple animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-on-scroll');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animation
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
